@@ -1,6 +1,9 @@
 riakvm
 ======
 
+[![Build
+Status](https://travis-ci.org/wlaurance/riakvm.png)](https://travis-ci.org/wlaurance/riakvm)
+
 cli to build riak instances
 
 Dependencies besides package.json deps

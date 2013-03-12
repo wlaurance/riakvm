@@ -1,0 +1,26 @@
+{
+  "name": "riakvm",
+  "version": "0.0.0",
+  "description": "cli to build riak instances",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wlaurance/riakvm.git"
+  },
+  "keywords": [
+    "clit",
+    "riak",
+    "cluster",
+    "instance"
+  ],
+  "author": "Will S. Laurance",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "f985eee36dbdcf0515e37df3e528175220f912e6",
+  "devDependencies": {
+    "mocha": "~1.8.2"
+  }
+}

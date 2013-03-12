@@ -4,7 +4,7 @@
   "description": "cli to build riak instances",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha -t 20000"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "gitHead": "f985eee36dbdcf0515e37df3e528175220f912e6",
   "devDependencies": {
     "mocha": "~1.8.2"
+  },
+  "dependencies": {
+    "request": "~2.14.0"
   }
 }

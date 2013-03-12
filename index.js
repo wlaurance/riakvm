@@ -1,5 +1,6 @@
 var request = require('request'),
-  fs = require('fs');
+  fs = require('fs'),
+  tar = require('tar.gz');
 
 exports.download = function(params, callback){
   if (!params.url){
@@ -20,8 +21,12 @@ exports.download = function(params, callback){
 exports.extract = function(params, callback){
   if (!params.fileName){
     callback(new Error('Missing file name'));
+  } else if (!params.dest){
+    callback(new Error('Missing destination'));
   } else {
-    callback(null);
+    new tar().extract(params.fileName, params.dest, function(err){
+      callback(err);
+    });
   }
 };
 

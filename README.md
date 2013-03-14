@@ -3,6 +3,8 @@ riakvm
 
 [![Build
 Status](https://travis-ci.org/wlaurance/riakvm.png)](https://travis-ci.org/wlaurance/riakvm)
+[![Dependency
+Status](https://david-dm.org/wlaurance/riakvm.png)](https://david-dm.org/wlaurance/riakvm)
 
 cli to build riak instances
 

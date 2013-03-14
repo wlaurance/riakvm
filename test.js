@@ -18,7 +18,7 @@ describe('lib', function(){
   });
   it('should download the specified file', function(done){
     lib.download({
-      url:'https://github.com/basho/riak/archive/riak-1.3.0.tar.gz',
+      url:'http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/1.3/1.3.0/riak-1.3.0.tar.gz',
       fileName:'riak-1.3.0.tar.gz'
     }, function(err){
       assert.equal(err, null);
@@ -46,16 +46,27 @@ describe('lib', function(){
       dest:'./'
     }, function(err){
       assert.equal(err, null);
-      fs.exists('riak-riak-1.3.0', function(exists){
+      fs.exists('riak-1.3.0', function(exists){
+        assert.ok(exists);
+        done();
+      });
+    });
+  });
+  it('should make all', function(done){
+    lib.build({
+      dir:'riak-1.3.0'
+    }, function(err){
+      assert.equal(err, null);
+      fs.exists('./riak-1.3.0/rel/riak/bin/riak', function(exists){
         assert.ok(exists);
         done();
       });
     });
   });
   after(function(done){
-    rimraf('./riak-riak-1.3.0', function(error){
+    rimraf('./riak-1.3.0', function(error){
       fs.unlink('./riak-1.3.0.tar.gz', function(){
-        fs.exists('./riak-riak-1.3.0', function(exists){
+        fs.exists('./riak-1.3.0', function(exists){
           assert.equal(exists, false);
           fs.exists('riak-1.3.0.tar.gz', function(exists){
             assert.equal(exists, false);

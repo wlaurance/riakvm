@@ -1,6 +1,7 @@
 var request = require('request'),
   fs = require('fs'),
-  tar = require('tar.gz');
+  tar = require('tar.gz'),
+  cp = require('child_process');
 
 exports.download = function(params, callback){
   if (!params.url){
@@ -30,6 +31,17 @@ exports.extract = function(params, callback){
   }
 };
 
-exports.build = function(callback){
-
+exports.build = function(params, callback){
+  if (!params.dir){
+    callback(new Error('Missing directory'));
+  } else {
+    var build = cp.spawn('make', ['rel'], {
+      cwd:params.dir,
+      env:process.env,
+      stdio:'inherit'
+    });
+    build.on('exit', function(code){
+      callback(code || null);
+    });
+  }
 };

@@ -34,6 +34,9 @@ exports.extract = function(params, callback){
 exports.build = function(params, callback){
   if (!params.dir){
     callback(new Error('Missing directory'));
+  } else if(params.fake){
+    var mkdirp = require('mkdirp');
+    mkdirp(params.dir + '/rel/riak/bin/riak', callback);
   } else {
     var build = cp.spawn('make', ['rel'], {
       cwd:params.dir,

@@ -54,7 +54,8 @@ describe('lib', function(){
   });
   it('should make all', function(done){
     lib.build({
-      dir:'riak-1.3.0'
+      dir:'riak-1.3.0',
+      fake:true
     }, function(err){
       assert.equal(err, null);
       fs.exists('./riak-1.3.0/rel/riak/bin/riak', function(exists){

@@ -9,6 +9,7 @@ var lib = require('./'),
 p
   .version(require('./package').version)
   .option('-w, --where [dir]', 'where to create instance, defaults to cwd', process.cwd())
+  .option('-n, --name [string]', 'name the output folder, defaults to untar name')
   ;
 
 /*
@@ -35,11 +36,19 @@ p
           throw err;
         }
         fs.unlink(fileName, function(){});
+        var buildName = p.where + '/riak-' + version
         lib.build({
-          dir:p.where + '/riak-' + version
+          dir:buildName
         }, function(err){
           if(err){
             throw err;
+          }
+          if(p.name){
+            if(fs.existsSync(p.where + '/' + p.name)){
+              throw new Error('Output dir exists. Not trying to delete your database: ' + p.where + '/' + p.name);
+            } else {
+              fs.renameSync(buildName, p.where + '/' + p.name);
+            }
           }
         });
       });

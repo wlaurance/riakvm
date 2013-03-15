@@ -1,10 +1,10 @@
 {
   "name": "riakvm",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "cli to build riak instances",
   "main": "index.js",
   "bin": {
-    "riakvm":"./riakvm"
+    "riakvm": "./riakvm"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha -t 5000000"

@@ -13,3 +13,27 @@ Dependencies besides package.json deps
 * [Read building riak from
 source](http://docs.basho.com/riak/1.3.0/tutorials/installation/Installing-Riak-from-Source/)
 
+
+Usage
+------
+```
+  Usage: riakvm [options] [command]
+
+  Commands:
+
+    create <version>       create riak instance of version
+
+  Options:
+
+    -h, --help           output usage information
+    -V, --version        output the version number
+    -w, --where [dir]    where to create instance, defaults to cwd
+    -n, --name [string]  name the output folder, defaults to untar name
+```
+
+Know versions to work
+---------------------
+```
+  riakvm create 1.3.0
+  riakvm create 1.2.0
+```

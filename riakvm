@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+var lib = require('./'),
+  fs = require('fs'),
+  p = require('commander');
+
+/*
+ * command line options
+ */
+p
+  .version(require('./package').version)
+  .option('-w, --where [dir]', 'where to create instance, defaults to cwd', process.cwd())
+  ;
+
+/*
+ * command line commands :)
+ */
+p
+  .command('create <version>')
+  .description('create riak instance of version')
+  .action(function(version){
+    var mm = version.split('.')[0] + '.' + version.split('.')[1];
+    var fileName = p.where + '/download' + new Date().toJSON() + '.tar.gz';
+    lib.download({
+      url:'http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/' + mm +'/' + version + '/riak-' + version + '.tar.gz',
+      fileName:fileName
+    }, function(err){
+      if(err){
+        throw err;
+      }
+      lib.extract({
+        fileName:fileName,
+        dest:p.where
+      }, function(err){
+        if(err){
+          throw err;
+        }
+        fs.unlink(fileName, function(){});
+        lib.build({
+          dir:p.where + '/riak-' + version
+        }, function(err){
+          if(err){
+            throw err;
+          }
+        });
+      });
+    });
+  });
+
+/*
+ * parse process.argv
+ */
+p
+  .parse(process.argv);

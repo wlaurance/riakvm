@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "cli to build riak instances",
   "main": "index.js",
+  "bin": {
+    "riakvm":"./riakvm"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha -t 5000000"
   },
@@ -27,6 +30,7 @@
   "dependencies": {
     "request": "~2.x.x",
     "tar.gz": "~0.1.1",
-    "rimraf": "~2.1.4"
+    "rimraf": "~2.1.4",
+    "commander": "~1.1.1"
   }
 }

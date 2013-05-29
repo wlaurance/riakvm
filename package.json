@@ -1,6 +1,6 @@
 {
   "name": "riakvm",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "cli to build riak instances",
   "main": "index.js",
   "bin": {

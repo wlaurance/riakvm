@@ -25,8 +25,14 @@ exports.extract = function(params, callback){
   } else if (!params.dest){
     callback(new Error('Missing destination'));
   } else {
-    new tar().extract(params.fileName, params.dest, function(err){
-      callback(err);
+    fs.exists(params.extractedDir || params.fileName.split('.tar.gz')[0], function(exists){
+      if (exists){
+        callback(new Error('output directory exists and could be written over'));
+      } else {
+        new tar().extract(params.fileName, params.dest, function(err){
+          callback(err);
+        });
+      }
     });
   }
 };

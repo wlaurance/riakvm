@@ -20,7 +20,8 @@ p
   .description('create riak instance of version')
   .action(function(version){
     var mm = version.split('.')[0] + '.' + version.split('.')[1];
-    var fileName = p.where + '/download' + new Date().toJSON() + '.tar.gz';
+    var fileName = p.where + '/riakvm-temp-download' + new Date().toJSON() + '.tar.gz';
+    var extractedDir = 'riak-' + version;
     lib.download({
       url:'http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/' + mm +'/' + version + '/riak-' + version + '.tar.gz',
       fileName:fileName
@@ -30,7 +31,8 @@ p
       }
       lib.extract({
         fileName:fileName,
-        dest:p.where
+        dest:p.where,
+        extractedDir:extractedDir
       }, function(err){
         if(err){
           throw err;

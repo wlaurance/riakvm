@@ -48,7 +48,13 @@ describe('lib', function(){
       assert.equal(err, null);
       fs.exists('riak-1.3.0', function(exists){
         assert.ok(exists);
-        done();
+        lib.extract({
+          fileName: 'riak-1.3.0.tar.gz',
+          dest:'./'
+        }, function(err){
+          assert.equal('Error: output directory exists and could be written over', err);
+          done();
+        });
       });
     });
   });

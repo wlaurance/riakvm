@@ -54,3 +54,10 @@ exports.build = function(params, callback){
     });
   }
 };
+
+//Check for binary executables required for building riak instances
+//This function will run when the library module is required
+var which = require('which');
+var required = ['git', 'make', 'erl', 'gcc', 'g++'];
+var checker = function(ex){ try { which.sync(ex); } catch (e) { throw e; }};
+required.forEach(checker);

@@ -22,6 +22,7 @@ Usage
   Commands:
 
     create <version>       create riak instance of version
+    ls [regex]             list remote versions of Riak
 
   Options:
 

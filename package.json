@@ -1,7 +1,7 @@
 {
   "name": "riakvm",
   "version": "0.2.1",
-  "description": "cli to build riak instances",
+  "description": "#nodejs cli to build #riak instances",
   "main": "index.js",
   "bin": {
     "riakvm": "./riakvm"

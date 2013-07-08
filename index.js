@@ -1,6 +1,8 @@
 var request = require('request'),
   fs = require('fs'),
   tar = require('tar.gz'),
+  async = require('async'),
+  _ = require('underscore'),
   cp = require('child_process');
 
 exports.download = function(params, callback){
@@ -53,6 +55,30 @@ exports.build = function(params, callback){
       callback(code || null);
     });
   }
+};
+
+exports.listVersions = function(params, callback){
+  var versionStripper = function(raw, cb){
+    var list = [];
+    raw.replace(/<a(.+)>(.+)<\/a>/g, function(a,b,c){
+      list.push(c.trim());
+    });
+    cb(_.filter(list, function(n){ return n !== 'CURRENT' && n !== 'Parent Directory' }));
+  }
+  request(params.url, function(e,r,b){
+    versionStripper(b, function(bases){
+      var transformer = function(v, cb){
+        request(params.url + v + '/', function(e,r,b){
+          versionStripper(b, function(list){
+            cb(null, {v:v, p:list});
+          });
+        });
+      };
+      async.map(bases, transformer, function(err, results){
+        callback(err, results);
+      });
+    });
+  });
 };
 
 //Check for binary executables required for building riak instances

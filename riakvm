@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 var lib = require('./'),
   fs = require('fs'),
-  p = require('commander');
+  p = require('commander'),
+  baseURL = 'http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/';
 
 /*
  * command line options
@@ -23,7 +24,7 @@ p
     var fileName = p.where + '/riakvm-temp-download' + new Date().toJSON() + '.tar.gz';
     var extractedDir = 'riak-' + version;
     lib.download({
-      url:'http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/' + mm +'/' + version + '/riak-' + version + '.tar.gz',
+      url:baseURL + mm +'/' + version + '/riak-' + version + '.tar.gz',
       fileName:fileName
     }, function(err){
       if(err){
@@ -54,6 +55,20 @@ p
           }
         });
       });
+    });
+  });
+
+p
+  .command('ls [regex]')
+  .description('list remote versions of Riak')
+  .action(function(regex){
+    lib.listVersions({url:baseURL}, function(err, versions){
+      if (err) throw err;
+      var async = require('async');
+      var colors = require('colors');
+      async.mapSeries(versions, function(v, cb){
+        cb(null, console.log(v.v.green.bold + '\t' + v.p.join('\t')));
+      }, process.exit);
     });
   });
 

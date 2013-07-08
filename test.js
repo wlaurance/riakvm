@@ -70,6 +70,13 @@ describe('lib', function(){
       });
     });
   });
+  it('should list available versions', function(done){
+    lib.listVersions({url:'http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/'}, function(err, list){
+      assert.equal(err, null);
+      assert.equal(list.length > 0, true);
+      done();
+    });
+  });
   after(function(done){
     rimraf('./riak-1.3.0', function(error){
       fs.unlink('./riak-1.3.0.tar.gz', function(){

@@ -66,6 +66,10 @@ p
       if (err) throw err;
       var async = require('async');
       var colors = require('colors');
+      if (typeof regex !== 'undefined'){
+        var _ = require('underscore');
+        versions = _.filter(versions, function(v) { return v.v.indexOf(regex) !== -1 })
+      }
       async.mapSeries(versions, function(v, cb){
         cb(null, console.log(v.v.green.bold + '\t' + v.p.join('\t')));
       }, process.exit);

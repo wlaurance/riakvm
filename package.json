@@ -24,7 +24,7 @@
   "readmeFilename": "README.md",
   "gitHead": "f985eee36dbdcf0515e37df3e528175220f912e6",
   "devDependencies": {
-    "mocha": "~1.8.2",
+    "mocha": "~1.12.0",
     "mkdirp": "~0.3.5"
   },
   "dependencies": {

@@ -11,6 +11,7 @@ p
   .version(require('./package').version)
   .option('-w, --where [dir]', 'where to create instance, defaults to cwd', process.cwd())
   .option('-n, --name [string]', 'name the output folder, defaults to untar name')
+  .option('-d, --disco', 'add color to the download progress bar; alias riakvm="riakvm -d" to persist ;)')
   ;
 
 /*
@@ -25,7 +26,8 @@ p
     var extractedDir = 'riak-' + version;
     lib.download({
       url:baseURL + mm +'/' + version + '/riak-' + version + '.tar.gz',
-      fileName:fileName
+      fileName:fileName,
+      disco: p.disco
     }, function(err){
       if(err){
         throw err;

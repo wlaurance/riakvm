@@ -30,11 +30,13 @@ Usage
     -V, --version        output the version number
     -w, --where [dir]    where to create instance, defaults to cwd
     -n, --name [string]  name the output folder, defaults to untar name
+    -d, --disco          add color to the download progress bar; alias riakvm="riakvm -d" to persist ;)
 ```
 
 Know versions to work
 ---------------------
 ```
+  riakvm create 1.4.0
   riakvm create 1.3.0
   riakvm create 1.2.0
 ```

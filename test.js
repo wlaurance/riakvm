@@ -19,7 +19,8 @@ describe('lib', function(){
   it('should download the specified file', function(done){
     lib.download({
       url:'http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/1.3/1.3.0/riak-1.3.0.tar.gz',
-      fileName:'riak-1.3.0.tar.gz'
+      fileName:'riak-1.3.0.tar.gz',
+      disco: true
     }, function(err){
       assert.equal(err, null);
       fs.exists('riak-1.3.0.tar.gz', function(exists){

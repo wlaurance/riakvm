@@ -13,11 +13,35 @@ exports.download = function(params, callback){
   } else {
     var file = request(params.url);
     var stream = fs.createWriteStream(params.fileName);
+    var charm = require('charm')();
+    charm.pipe(process.stdout);
+    charm.reset();
+    charm.write('\n');
+    file.on('response', function(r){
+      var totalFileLength = parseInt(r.headers['content-length'], 10);
+      var counter = 0;
+      var prevStringLen = 0;
+      charm.cursor(false);
+      charm.right(1);
+      file.on('data', function(d){
+        counter += d.length;
+        var prct = ((counter / totalFileLength) * 100).toFixed(2);
+        var str = prct + '% downloaded';
+        if (params.disco)
+          charm.foreground(Math.floor((prct * .01) * 255));
+        charm.write(str);
+        charm.left(str.length);
+      });
+    });
     stream.on('error', function(error){
       callback(error);
     });
     file.pipe(stream);
-    file.on('end', callback);
+    file.on('end', function(){
+      charm.cursor(true);
+      charm.end();
+      callback();
+    });
   }
 };
 

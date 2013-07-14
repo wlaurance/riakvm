@@ -33,9 +33,7 @@ exports.download = function(params, callback){
         charm.left(str.length);
       });
     });
-    stream.on('error', function(error){
-      callback(error);
-    });
+    stream.on('error', callback);
     file.pipe(stream);
     file.on('end', function(){
       charm.cursor(true);
@@ -55,9 +53,7 @@ exports.extract = function(params, callback){
       if (exists){
         callback(new Error('output directory exists and could be written over'));
       } else {
-        new tar().extract(params.fileName, params.dest, function(err){
-          callback(err);
-        });
+        new tar().extract(params.fileName, params.dest, callback);
       }
     });
   }
@@ -98,9 +94,7 @@ exports.listVersions = function(params, callback){
           });
         });
       };
-      async.map(bases, transformer, function(err, results){
-        callback(err, results);
-      });
+      async.map(bases, transformer, callback);
     });
   });
 };

@@ -83,3 +83,10 @@ p
  */
 p
   .parse(process.argv);
+
+/*
+ * output help if no arguments are passed in
+ */
+if (process.argv.length === 2) {
+  p.help();
+}

@@ -98,7 +98,7 @@ describe('bin', function() {
   it('should output --help with no options', function(done){
     function run(a, cb) {
       var data = "";
-      cp('riakvm', a)
+      cp('./riakvm', a)
       .stdout.on('data', function(d) {
         data += d.toString();
       })

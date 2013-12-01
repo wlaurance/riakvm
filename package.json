@@ -24,7 +24,7 @@
   "readmeFilename": "README.md",
   "gitHead": "f985eee36dbdcf0515e37df3e528175220f912e6",
   "devDependencies": {
-    "mocha": "~1.12.0",
+    "mocha": "~1.14.0",
     "mkdirp": "~0.3.5"
   },
   "dependencies": {
@@ -36,7 +36,6 @@
     "async": "~0.2.9",
     "underscore": "~1.5.2",
     "colors": "~0.6.0-1",
-    "charm": "~0.1.2",
-    "mocha": "~1.14.0"
+    "charm": "~0.1.2"
   }
 }

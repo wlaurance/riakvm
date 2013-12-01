@@ -92,3 +92,25 @@ describe('lib', function(){
     });
   });
 });
+
+describe('bin', function() {
+  var cp = require('child_process').spawn;
+  it('should output --help with no options', function(done){
+    function run(a, cb) {
+      var data = "";
+      cp('riakvm', a)
+      .stdout.on('data', function(d) {
+        data += d.toString();
+      })
+      .on('close', function() {
+        cb(null, data);
+      });
+    }
+    run([], function(err, data1) {
+      run(['--help'], function(err, data2) {
+        assert.equal(data1, data2);
+        done();
+      });
+    });
+  });
+});
